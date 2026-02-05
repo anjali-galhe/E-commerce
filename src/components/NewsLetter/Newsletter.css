@@ -1,0 +1,59 @@
+.newsletter {
+    width: 70%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 80px auto;
+    padding: 0 140px;
+    gap: 20px; /* Space between text and the input box */
+    text-align: center;
+    border: 1px solid gray;
+}
+
+.newsletter h1 {
+    color: #454545;
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 0; /* Removing default margins to keep alignment tight */
+}
+
+.newsletter p {
+    color: #454545;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+/* This is the key wrapper that keeps input and button on one line */
+.newsletter div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    width: 730px;
+    height: 70px;
+    border-radius: 80px;
+    border: 1px solid #e3e3e3;
+    padding-left: 30px; /* Pushes the text inside the input away from the edge */
+    overflow: hidden; /* Ensures the button doesn't spill over the rounded corners */
+}
+
+.newsletter input {
+    flex: 1; /* Takes up all available space except for the button */
+    border: none;
+    outline: none;
+    color: #616161;
+    font-size: 16px;
+}
+
+.newsletter button {
+    width: 210px;
+    height: 70px;
+    border-radius: 80px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}

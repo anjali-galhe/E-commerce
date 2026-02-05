@@ -1,0 +1,79 @@
+.new-collections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 100px; /* Optional: adds space at the bottom of the section */
+}
+
+.new-collections h1 {
+    color: #171717;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.new-collections hr {
+    width: 200px;
+    height: 6px;
+    border-radius: 10px;
+    background: #252525;
+    border: none; /* Removes default border for a cleaner look */
+}
+
+.collections {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-auto-rows: min-content;
+
+    gap: 80px 30px;
+    margin-top: 50px;
+    width: 90%;
+    margin-inline: auto;
+}
+.collections > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.collections p{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #374151;
+    margin: 0;
+}
+.item.price{
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.item.price-new{
+    color: #374151;
+}
+.item.price-old{
+    color: #8c8c8c;
+    text-decoration: line-through;
+}
+/* Specific styling for the images inside the Item component */
+.collections img {
+    width: 100%;
+    height: 350px;        
+    object-fit: cover;    
+    border-radius: 8px;
+    transition: 0.3s; /* Smooth effect if you add hover later */
+}
+
+/* Responsive adjustment: Adjust columns for smaller screens */
+@media (max-width: 1280px) {
+    .collections {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .collections {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
