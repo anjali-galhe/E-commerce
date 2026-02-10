@@ -4,8 +4,7 @@ import cart from '../Assets/cart1.png'
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
-import { ShopContext } from '../../context/ShopContext';
-
+import { ShopContext } from '../../context/shopContext'
 const Navbar = () => {
 
   const {getTotalCartItems} = useContext(ShopContext);

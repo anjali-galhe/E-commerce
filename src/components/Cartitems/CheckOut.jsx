@@ -7,7 +7,14 @@ import "./Checkout.css";
 
 const CheckOut = () => {
 
-    const {getTotalCartAmount} = useContext(ShopContext);
+
+
+  
+
+
+
+const { getTotalCartAmount, all_product, cartItems } =
+  useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
     const navigate = useNavigate();
 
@@ -68,6 +75,33 @@ navigate("/payment", { state: { address, totalAmount, orderId } });
 
 
   }
+
+  const orderedProducts = all_product.filter(
+  (p) => cartItems[p.id] > 0
+).map((p) => ({
+  id: p.id,
+  name: p.name,
+  image: p.image,
+  price: p.new_price,
+  quantity: cartItems[p.id],
+}));
+
+
+const orderDetails = {
+  id: orderId,
+  address,
+  products: orderedProducts,
+  totalAmount,
+  deliveryType: "Today Delivery",
+  orderDate: new Date().toISOString(),
+  status: "Order Placed",
+  tracking: [
+    "Order Placed",
+    "Packed",
+    "Out for Delivery",
+    "Delivered",
+  ],
+};
     return (
         <>
         <div className="checkout-container">
@@ -137,8 +171,11 @@ navigate("/payment", { state: { address, totalAmount, orderId } });
 
     <div className="checkout-right-section">
           {address ? (
+            
       <div className="save-address-box">
+
         <h3>Delivary Address</h3>
+        
         <p><b>Name:</b> {address.name}</p>
         <p><b>Phone:</b> {address.phone}</p>
         <p><b>Address:</b> {address.address}</p>
