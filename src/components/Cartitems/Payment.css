@@ -1,0 +1,206 @@
+/* Payment.css */
+
+.payment {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.payment h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.payment-content {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Left Section: Address & Trust Badges */
+.payment-left {
+  flex: 1;
+  min-width: 300px;
+  background: #fdfdfd;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.payment-left h3 {
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.payment-left p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.payment-bottom {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.security-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.security-item::before {
+  content: "🛡️";
+  margin-right: 10px;
+}
+
+/* Right Section: Form & Payment Methods */
+.payment-right {
+  flex: 1.5;
+  min-width: 350px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.payment-right h3 {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+/* Dropdown & Inputs */
+.payment-dropdown, 
+.upi-box input, 
+.card-details input, 
+.coupon-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+.card-row {
+  display: flex;
+  gap: 15px;
+}
+
+/* Radio Buttons for Delivery */
+label {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+label:hover {
+  background: #f0f7ff;
+  border-color: #3498db;
+}
+
+label input {
+  margin-right: 15px;
+  transform: scale(1.2);
+}
+
+/* Coupon Section */
+.coupon-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #fcf8e3;
+  border-radius: 8px;
+}
+
+.coupon-box input {
+  flex: 2;
+  margin-bottom: 0;
+}
+
+.apply-coupon-btn {
+  flex: 1;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.coupon-success {
+  color: #27ae60;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+/* Summary Section */
+.final-summary {
+  margin-top: 30px;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.final-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.final-summary h3 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #ddd;
+  color: #e74c3c;
+  font-size: 1.5rem;
+}
+
+/* Confirm Button */
+.confirm-btn {
+  width: 100%;
+  padding: 18px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background: #219150;
+}
+
+/* Responsive Tweak */
+@media (max-width: 768px) {
+  .payment-content {
+    flex-direction: column;
+  }
+}

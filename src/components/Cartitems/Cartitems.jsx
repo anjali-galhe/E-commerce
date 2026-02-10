@@ -1,14 +1,31 @@
 import './cartitems.css'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState  } from 'react'
 import cart_cross_icon from '../Assets/cart_cross_icon.png'
 import { ShopContext } from '../../context/shopContext'
+import { useNavigate } from 'react-router-dom'
+import cart_empty from '../Assets/cart_empty.png'
 
 const Cartitems = () => {
   const { all_product, cartItems, removeFromCart, getTotalCartAmount } = useContext(ShopContext)
   const [shippingCost, setShippingCost] = useState(0);
+  const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/CheckOut")
+  }
 
+    const totalAmount = getTotalCartAmount();
+
+if(totalAmount === 0){
+  return(
+  <div className="empty-cart-img">
+    <img src={cart_empty} alt="Cart is Empty!!" />
+  </div>
+  );
+}
   return (
+    
     <div className='cart-items'>
       <div className="cartitem-format-main">
         <p>Product</p>
@@ -84,14 +101,13 @@ const Cartitems = () => {
     Express Shipping (₹100)
   </label>
 </div>
-
             </div>
             <hr />
             <div className='cartitem-total-item'></div>
                 <h3>Total</h3>
                 <h3>${getTotalCartAmount() + shippingCost}</h3>
             </div>
-            <button className='cartitem-checkout-button'>Proceed to Checkout</button>
+            <button className='cartitem-checkout-button'onClick={handleSubmit}>Proceed to Checkout</button>
         </div>
         <div className="cartitem-promocode">
             <p>If you have promo code, Enter it here.</p>

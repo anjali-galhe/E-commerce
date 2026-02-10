@@ -1,0 +1,152 @@
+/* Checkout.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+.checkout-container {
+    padding: 60px 5%;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    color: #111;
+    min-height: 100vh;
+}
+
+.checkout-heading {
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    letter-spacing: -1px;
+}
+
+.checkout-section {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* Form Styles */
+.checkout-left-section {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.add-adress-btn {
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.add-adress-btn:hover {
+    background: #333;
+}
+
+.adress-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.adress-form input {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.adress-form input:focus {
+    border-bottom-color: #111;
+}
+
+.adress-form button {
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Right Section - Summary */
+.checkout-right-section {
+    background: #fafafa;
+    padding: 40px;
+    position: sticky;
+    top: 50px;
+}
+
+.save-address-box h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.save-address-box p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.edit-addres-btn {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    font-size: 0.8rem;
+    margin-top: 15px;
+    cursor: pointer;
+    color: #666;
+}
+
+/* Order Summary Details */
+.order-box {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #ddd;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.place-order-btn:hover {
+    background: #444;
+}
+
+.no-address-text {
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .checkout-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

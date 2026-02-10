@@ -175,3 +175,10 @@
 .cartitem-apply-button:hover {
   opacity: 0.8;
 }
+.empty-cart-img{
+  text-align: center;
+  margin-top: 100px;
+}
+.empty-cart-img img{
+  width: 530px;
+}

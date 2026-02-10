@@ -1,0 +1,103 @@
+/* Order.css */
+
+:root {
+  --success-green: #22c55e;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --bg-subtle: #f8fafc;
+  --white: #ffffff;
+}
+
+.order-success {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Success Header with Checkmark effect */
+.order-success h2 {
+  color: var(--success-green);
+  font-size: 2rem;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.order-success h2::before {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #dcfce7;
+  color: var(--success-green);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Sections Styling */
+.order-details, .shipping-adress {
+  text-align: left;
+  background: var(--bg-subtle);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.order-details h3, .shipping-adress h3 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 8px;
+}
+
+.order-details p, .shipping-adress p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Making labels bold in the summary */
+.order-details p::before {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Specific styling for the amount */
+.order-details p:first-of-type {
+  font-size: 1.1rem;
+  color: var(--success-green);
+  font-weight: 700;
+}
+
+/* Shipping address specific tweaks */
+.shipping-adress p {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.shipping-adress p b {
+  min-width: 80px;
+  color: var(--text-dark);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .order-success {
+    margin: 20px;
+    padding: 20px;
+  }
+}
