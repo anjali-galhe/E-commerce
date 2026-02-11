@@ -5,6 +5,8 @@ import './navbar.css'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { ShopContext } from '../../context/shopContext'
+import { TbTruckDelivery } from "react-icons/tb";
+
 const Navbar = () => {
 
   const {getTotalCartItems} = useContext(ShopContext);
@@ -26,6 +28,9 @@ const Navbar = () => {
           <div className="nav-cart-count">
             {getTotalCartItems()}
           </div>
+        <div className="delivery-box">
+          <Link to="/orders"> <TbTruckDelivery/></Link>
+        </div>
         </div>
         
       

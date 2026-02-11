@@ -50,32 +50,43 @@ const { getTotalCartAmount, all_product, cartItems } =
     setFormVisible(false);
   }
 
-  const handlePlaceOder = () =>{
-   if(!address){
-  alert("Enter Adress first")
-  return;
-   }
-
-   const orderId = Date.now()
-   const orderDetails ={
-    id: orderId,
-    address,
-    totalAmount,
-    deliveryType:"Today Delivery",
-    orderDate: new Date().toISOString(),
-    status:"Order placed",
-
-   };
-
-const existingOrders = JSON.parse(localStorage.getItem("customer-orders")) || [];
-localStorage.setItem("customer-orders", JSON.stringify([...existingOrders, orderDetails]));
-
-navigate("/payment", { state: { address, totalAmount, orderId } });
-
-
-
+ const handlePlaceorder = () => {
+  if (!address) {
+    alert("Enter Address first");
+    return;
   }
 
+  const orderId = Date.now();
+
+  const orderDetails = {
+    id: orderId,
+    address,
+    products: orderedProducts,   // 👈 add this
+    totalAmount,
+    deliveryType: "Today Delivery",
+    orderDate: new Date().toISOString(),
+    status: "Order Placed",
+    tracking: [
+      "Order Placed",
+      "Packed",
+      "Out for Delivery",
+      "Delivered",
+    ],
+  };
+
+  const existingOrders =
+    JSON.parse(localStorage.getItem("customer-orders")) || [];
+
+  localStorage.setItem(
+    "customer-orders",
+    JSON.stringify([...existingOrders, orderDetails])
+  );
+
+  navigate("/payment", { state: { address, totalAmount, orderId } });
+};
+
+
+  
   const orderedProducts = all_product.filter(
   (p) => cartItems[p.id] > 0
 ).map((p) => ({
@@ -87,21 +98,7 @@ navigate("/payment", { state: { address, totalAmount, orderId } });
 }));
 
 
-const orderDetails = {
-  id: orderId,
-  address,
-  products: orderedProducts,
-  totalAmount,
-  deliveryType: "Today Delivery",
-  orderDate: new Date().toISOString(),
-  status: "Order Placed",
-  tracking: [
-    "Order Placed",
-    "Packed",
-    "Out for Delivery",
-    "Delivered",
-  ],
-};
+
     return (
         <>
         <div className="checkout-container">
@@ -116,14 +113,14 @@ const orderDetails = {
         <button
 
         onClick={()=>{setFormVisible(true)}}
-        className="add-adress-btn">
+        className="add-address-btn">
             
         +Add Address
         
         </button>
     )}
     {formVisible && (
-    <form onSubmit={handleSubmit} className="adress-form">
+    <form onSubmit={handleSubmit} className="address-form">
         <input 
         type="text"
         name="name"
@@ -155,14 +152,15 @@ const orderDetails = {
         onChange={handleChange}
         required
          />
-         <input type="pincode"
+
+         <input type="number"
          name="pincode"
          placeholder="Pincode"
          value={formData.pincode}
          onChange={handleChange} 
          />
 
-         <button>Save Adress</button>
+         <button>Save Address</button>
 
 
     </form>
@@ -174,7 +172,7 @@ const orderDetails = {
             
       <div className="save-address-box">
 
-        <h3>Delivary Address</h3>
+        <h3>delivery Address</h3>
         
         <p><b>Name:</b> {address.name}</p>
         <p><b>Phone:</b> {address.phone}</p>
@@ -196,7 +194,7 @@ onClick={()=>{
    Total Amount: <span>${totalAmount}</span>
   </p>
   <button className="place-order-btn"
-  onClick={handlePlaceOder}>
+  onClick={handlePlaceorder}>
     Place Order
   </button>
  </div>

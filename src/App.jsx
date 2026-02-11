@@ -32,11 +32,10 @@ function App() {
         <Route path='/mens' element={<ShopCato banner ={men_banner}category="men"/>} />
         <Route path='/womens' element={<ShopCato banner ={women_banner}category="women"/>} />
         <Route path='/kids' element={<ShopCato  banner ={kids_banner}category="kid"/>} />
-        <Route path='/product' element={<Product/>} />
   
 <Route path='/product/:productId' element={<Product />} />
         <Route path='/cart' element={<Cart/>} />
-        <Route path='login' element={<LoginSignup/>} />
+        <Route path='/login' element={<LoginSignup/>} />
 
         <Route path='/checkout' element={<CheckOut/>}/>
 
@@ -44,6 +43,8 @@ function App() {
         <Route path='/order' element={<Order/>}/>
 
         <Route path="/orders" element={<MyOrders />} />
+        <Route path="*" element={<h2>Page Not Found</h2>} />
+
 
 
 </Routes>

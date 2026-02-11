@@ -17,7 +17,9 @@ const MyOrders = () => {
       {orders.length === 0 ? (
         <p>No orders placed yet</p>
       ) : (
-        orders.map((order) => (
+orders
+  .filter(order => order.products && order.products.length > 0)
+  .map((order) => (
           <div key={order.id} className="order-card">
             <h3>Order ID: {order.id}</h3>
             <p>
@@ -27,7 +29,7 @@ const MyOrders = () => {
 
             {/* PRODUCTS */}
             <div className="ordered-products">
-              {order.products.map((item) => (
+            {(order.products || []).map((item) => (
                 <div key={item.id} className="ordered-item">
                   <img src={item.image} alt={item.name} />
                   <div>
@@ -41,19 +43,24 @@ const MyOrders = () => {
             </div>
 
             {/* TRACKING */}
-            <h4>Order Tracking</h4>
-            <ul className="tracking-list">
-              {order.tracking.map((step, index) => (
-                <li
-                  key={index}
-                  className={
-                    step === order.status ? "active" : ""
-                  }
-                >
-                  {step}
-                </li>
-              ))}
-            </ul>
+{order.status === "Order Placed" &&
+ order.tracking &&
+ order.tracking.length > 0 && (
+  <>
+    <h4>Order Tracking</h4>
+    <ul className="tracking-list">
+      {order.tracking.map((step, index) => (
+        <li
+          key={index}
+          className={step === order.status ? "active" : ""}
+        >
+          {step}
+        </li>
+      ))}
+    </ul>
+  </>
+)}
+
           </div>
         ))
       )}
