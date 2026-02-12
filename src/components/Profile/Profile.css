@@ -1,0 +1,106 @@
+/* .logout-btn button{
+    padding: 20px 35px;
+    border-radius: 50px;
+border: 1px solid black;
+background: white;
+font-size: 15px;
+}
+.profile-container{
+    margin: 100px 580px;
+    text-align: center;
+    border: 1px solid grey;
+}
+.profile-logo{
+    font-size: 70px;
+}
+.profile-logo p{
+    font-size: 20px;
+}
+.order-cart span{
+    border: 1px solid;
+    padding: 10px 25px;
+    border-radius: 30px;
+    margin: 18px 9px;
+}
+.order-cart{
+    text-decoration: none;
+} */
+ /* Container styling */
+.profile-container {
+    max-width: 480px;
+    margin: 170px auto;
+    padding: 3rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Logo and User Info */
+.profile-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-logo svg {
+    font-size: 80px;
+    color: #192281;
+    margin-bottom: 1rem;
+}
+
+.profile-logo p {
+    margin: 5px 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.profile-logo p:last-child {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* Navigation Links (Orders/Cart) */
+.order-cart {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+}
+
+.order-cart span a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.order-cart span a:hover {
+    color: #09182d;
+}
+
+/* Logout Button */
+.logout-btn button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.logout-btn button:hover {
+    background-color: #d93636;
+}
+
+.logout-btn button:active {
+    transform: scale(0.98);
+}

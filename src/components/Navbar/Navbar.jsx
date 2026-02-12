@@ -5,11 +5,30 @@ import './navbar.css'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { ShopContext } from '../../context/shopContext'
-import { TbTruckDelivery } from "react-icons/tb";
+// import { TbTruckDelivery } from "react-icons/tb";
+import { TfiLocationPin } from "react-icons/tfi";
+
+
+import { useState, useEffect } from "react";
+import { RiUserHeartLine } from "react-icons/ri";
+
+
+
 
 const Navbar = () => {
 
   const {getTotalCartItems} = useContext(ShopContext);
+
+  const [isLogin, setIsLogin] = useState(false);
+
+useEffect(() => {
+  const loginStatus = localStorage.getItem("isLoggedIn");
+  if (loginStatus === "true") {
+    setIsLogin(true);
+  }
+}, []);
+
+
   return (
     <div className="navbar">
     <div className='navbar-1'>
@@ -22,14 +41,25 @@ const Navbar = () => {
           <button>⌕</button>
         </div>
         <div className="nav-login-cart">
-          <Link to="/login"><button className='login-btn'>Login</button></Link>
+{isLogin ? (
+  <Link to="/profile">
+    <div className="profile-img">
+    <RiUserHeartLine />
+    </div>
+
+  </Link>
+) : (
+  <Link to="/login">
+    <button className='login-btn'>Login</button>
+  </Link>
+)}
           {/* <img src={heart} alt="Heart" className='heart-icon'/> */}
           <Link to="/cart"><img src={cart} alt="Cart" className='cart-icon'/></Link>
           <div className="nav-cart-count">
             {getTotalCartItems()}
           </div>
         <div className="delivery-box">
-          <Link to="/orders"> <TbTruckDelivery/></Link>
+          <Link to="/orders"> <TfiLocationPin/></Link>
         </div>
         </div>
         

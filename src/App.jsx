@@ -15,6 +15,7 @@ import CheckOut from './components/Cartitems/CheckOut'
 import Payment from './components/Cartitems/Payment'
 import Order from './components/Cartitems/order'
 import MyOrders from './components/MyOrder/MyOrder'
+import Profile from './components/Profile/Profile'
 
 function App() {
   
@@ -43,6 +44,7 @@ function App() {
         <Route path='/order' element={<Order/>}/>
 
         <Route path="/orders" element={<MyOrders />} />
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="*" element={<h2>Page Not Found</h2>} />
 
 
