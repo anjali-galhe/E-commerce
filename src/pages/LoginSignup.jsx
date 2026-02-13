@@ -18,7 +18,7 @@ useEffect(() => {
 const users = localStorage.getItem("users");
 if(users){
   setUserdata(JSON.parse(users))
-}
+}                                    
 
 },[]);
 
@@ -82,9 +82,6 @@ const handleSubmit = (e) => {
 };
 
 
-
-
-
   return (
     <div className='loginsignup'>
       
@@ -120,7 +117,7 @@ const handleSubmit = (e) => {
            required/>
            
           <div className="loginsignupagree">
-            <input type="checkbox" name= '' id='' />
+            <input type="checkbox" />
        <p>by continuing , i agree to the terms of service and privacy policy</p>
           </div>
         </div>

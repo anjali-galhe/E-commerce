@@ -3,6 +3,7 @@ import star_dull_icon from '../Assets/star_dull_icon.png'
 import star_icon from '../Assets/star_icon.png'
 import { useContext,useState } from 'react'
 import { ShopContext } from '../../context/ShopContext'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDisplay = (props) => {
     const {product} = props;
@@ -30,6 +31,11 @@ const ProductDisplay = (props) => {
             transformOrigin: 'center'
         })
     }
+
+    const navigate = useNavigate();
+
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
   return (
     <div className='productdisplay'>
       <div className="productdisplay-left">
@@ -79,7 +85,22 @@ const ProductDisplay = (props) => {
                          <div className="size-option">XXL</div>
                     </div>
                 </div>
-                <button className="add-to-cart" onClick={()=>{addToCart(product.id)}}>Add to Cart</button>
+            
+                <button className="add-to-cart" onClick={() => {
+  if (isLoggedIn) {
+    addToCart(product.id);
+  } else {
+    navigate("/login");
+  }
+}}>Add to Cart</button>
+
+
+{/* <button 
+ disabled={!isLoggedIn}
+ onClick={()=> alert("helooooooooo")}
+>hi</button> */}
+                
+                
                 <p className='productsdisplay-right-category'>
                      <span>Category:</span>Women, T-Shirt,Crop Top</p>
                      <p className='productsdisplay-right-category'>

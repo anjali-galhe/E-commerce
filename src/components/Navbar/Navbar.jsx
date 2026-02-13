@@ -54,7 +54,7 @@ useEffect(() => {
   </Link>
 )}
           {/* <img src={heart} alt="Heart" className='heart-icon'/> */}
-          <Link to="/cart"><img src={cart} alt="Cart" className='cart-icon'/></Link>
+          <Link to="/cart" ><img src={cart} alt="Cart" className='cart-icon' /></Link>
           <div className="nav-cart-count">
             {getTotalCartItems()}
           </div>
