@@ -2,7 +2,7 @@ import './productdisplay.css'
 import star_dull_icon from '../Assets/star_dull_icon.png'
 import star_icon from '../Assets/star_icon.png'
 import { useContext,useState } from 'react'
-import { ShopContext } from '../../context/ShopContext'
+import { ShopContext } from '../../context/shopContext'
 import { useNavigate } from 'react-router-dom'
 
 const ProductDisplay = (props) => {

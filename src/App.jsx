@@ -16,11 +16,28 @@ import Payment from './components/Cartitems/Payment'
 import Order from './components/Cartitems/order'
 import MyOrders from './components/MyOrder/MyOrder'
 import Profile from './components/Profile/Profile'
+import Admin from "./components/Admin/Admin"
+import { useShopContext } from './context/ShopContext'
+import AdminLayout from './components/Admin/AdminLayout'
+import AdminDashboard from './components/Admin/AdminDashboard'
+
+
 
 function App() {
+  const { role } = useShopContext();
   
 
   return (
+
+    role === "admin" ? (
+
+         <Routes>
+    <Route element={<AdminLayout />}>
+      <Route path="/*" element={<AdminDashboard />} />
+    </Route>
+  </Routes>
+
+      ) : (
   
   <>
   <header>
@@ -45,17 +62,20 @@ function App() {
 
         <Route path="/orders" element={<MyOrders />} />
         <Route path="/profile" element={<Profile/>}/>
+        {/* <Route path="/admin" element={<Admin/>}/> */}
         <Route path="*" element={<h2>Page Not Found</h2>} />
 
-
-
-</Routes>
-</main>
-<Footer/>
-  </>
-
-
-  )
-}
-
+        
+        
+        
+        </Routes>
+        </main>
+        <Footer/>
+        </>
+        
+      )
+        
+      )
+    }
+    
 export default App

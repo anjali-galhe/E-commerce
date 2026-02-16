@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState ,useEffect} from "react";
 import all_product from "../components/Assets/all_product";
 
 export const ShopContext = createContext(null);
@@ -18,6 +18,30 @@ export const useShopContext = () => {
 const ShopContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState("user"); // default
+
+
+
+  const login = (email, password, selectedRole) => {
+  setUser({ email });
+  setRole(selectedRole);
+};
+
+useEffect(() => {
+  const savedUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (savedUser) {
+    setRole(savedUser.role);
+  }
+}, []);
+
+
+const logout = () => {
+  setUser(null);
+  setRole("user");
+};
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
@@ -72,6 +96,10 @@ const ShopContextProvider = ({ children }) => {
     getTotalCartItems,
     search,
     setSearch,
+    user,
+    role,
+    login,
+    logout
   };
 
   return (
