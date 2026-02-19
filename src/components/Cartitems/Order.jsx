@@ -2,10 +2,35 @@ import React from 'react'
 import './Order.css'
 import { useLocation } from 'react-router-dom'
 
+import { useEffect } from "react";
+
+
 const order = () => {
+
+
 
 const location = useLocation();
 const {totalAmount,address,paymentMethod ,details,deliveyOption} = location.state || {};
+
+useEffect(() => {
+  if (totalAmount) {
+    const newOrder = {
+      id: Date.now(),
+      totalAmount,
+      paymentMethod,
+      address,
+      deliveryOption: deliveyOption
+    };
+
+    const existingOrders =
+      JSON.parse(localStorage.getItem("orders")) || [];
+
+    existingOrders.push(newOrder);
+
+    localStorage.setItem("orders", JSON.stringify(existingOrders));
+  }
+}, []);
+
 
   return (
     <>

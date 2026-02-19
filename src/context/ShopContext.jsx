@@ -3,13 +3,16 @@ import all_product from "../components/Assets/all_product";
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
+
+
+const getDefaultCart = (productList) => {
   let cart = {};
-  for (let index = 0; index < all_product.length + 1; index++) {
-    cart[index] = 0;
-  }
+  productList.forEach((product) => {
+    cart[product.id] = 0;
+  });
   return cart;
 };
+
 
 export const useShopContext = () => {
   return useContext(ShopContext);
@@ -17,31 +20,83 @@ export const useShopContext = () => {
 
 const ShopContextProvider = ({ children }) => {
   const [search, setSearch] = useState("");
-  const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [cartItems, setCartItems] = useState({});
   
   const [user, setUser] = useState(null);
   const [role, setRole] = useState("user"); // default
 
+  //new product
+  const [products,setProducts] = useState([]);
+  
 
 
-  const login = (email, password, selectedRole) => {
-  setUser({ email });
+useEffect(() => {
+  const savedProducts = JSON.parse(localStorage.getItem("products"));
+
+  if (savedProducts) {
+    setProducts(savedProducts);
+    setCartItems(getDefaultCart(savedProducts));
+  } else {
+    setProducts(all_product);
+    localStorage.setItem("products", JSON.stringify(all_product));
+    setCartItems(getDefaultCart(all_product));
+  }
+}, []);
+
+
+const addProduct = (productData) => {
+  const updatedProducts = [...products, productData];
+  setProducts(updatedProducts);
+  localStorage.setItem("products", JSON.stringify(updatedProducts));
+};
+
+//end new product
+
+const login = (name, email, selectedRole) => {
+  const userData = {
+    name,
+    email,
+    role: selectedRole
+  };
+
+  // Get existing users
+  const existingUsers =
+    JSON.parse(localStorage.getItem("users")) || [];
+
+  // Add new user
+  existingUsers.push(userData);
+
+  // Save updated users list
+  localStorage.setItem("users", JSON.stringify(existingUsers));
+
+  // Save current logged in user
+  localStorage.setItem("currentUser", JSON.stringify(userData));
+
+  setUser(userData);
   setRole(selectedRole);
 };
+
 
 useEffect(() => {
   const savedUser = JSON.parse(localStorage.getItem("currentUser"));
 
   if (savedUser) {
     setRole(savedUser.role);
+    setUser(savedUser);
   }
 }, []);
 
 
+// const logout = () => {
+//   setUser({email});
+//   setRole("selectedRole");
+// };
 const logout = () => {
+  localStorage.removeItem("currentUser");
   setUser(null);
   setRole("user");
 };
+
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({
@@ -65,9 +120,13 @@ const logout = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        const itemInfo = all_product.find(
-          (product) => product.id === Number(item)
-        );
+        // const itemInfo = all_product.find(
+        //   (product) => product.id === Number(item)
+        // );
+        const itemInfo = products.find(
+  (product) => product.id === Number(item)
+);
+
         if (itemInfo) {
           totalAmount += cartItems[item] * itemInfo.new_price;
         }
@@ -99,7 +158,12 @@ const logout = () => {
     user,
     role,
     login,
-    logout
+    logout,
+    products,
+    addProduct,
+    setProducts
+
+
   };
 
   return (
