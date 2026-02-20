@@ -27,6 +27,14 @@ const ShopContextProvider = ({ children }) => {
 
   //new product
   const [products,setProducts] = useState([]);
+  // const[productList, setProductList] = useState("");
+
+  const deleteProduct =(itemId) => {
+       setProducts((prev) => ({
+      ...prev,
+      [itemId]: prev[itemId] - 1,
+    }));
+  };
   
 
 
@@ -45,9 +53,14 @@ useEffect(() => {
 
 
 const addProduct = (productData) => {
+   productData.id=products.length+1;
+  console.log('addProduct=> ', productData);
+  
+ 
   const updatedProducts = [...products, productData];
   setProducts(updatedProducts);
   localStorage.setItem("products", JSON.stringify(updatedProducts));
+  debugger;
 };
 
 //end new product
@@ -112,9 +125,12 @@ const logout = () => {
     }));
   };
 
+  // const clearCart = () => {
+  //   setCartItems(getDefaultCart());
+  // };
   const clearCart = () => {
-    setCartItems(getDefaultCart());
-  };
+  setCartItems(getDefaultCart(products));
+};
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -161,8 +177,8 @@ const logout = () => {
     logout,
     products,
     addProduct,
-    setProducts
-
+    setProducts,
+deleteProduct,
 
   };
 

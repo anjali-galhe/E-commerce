@@ -1,12 +1,12 @@
 import './cartitems.css'
 import React, { useContext, useState  } from 'react'
 import cart_cross_icon from '../Assets/cart_cross_icon.png'
-import { ShopContext } from '../../context/shopContext'
+import { ShopContext } from '../../context/ShopContext'
 import { useNavigate } from 'react-router-dom'
 import cart_empty from '../Assets/cart_empty.png'
 
 const Cartitems = () => {
-  const { all_product, cartItems, removeFromCart, getTotalCartAmount } = useContext(ShopContext)
+  const { products, cartItems, removeFromCart, getTotalCartAmount } = useContext(ShopContext)
   const [shippingCost, setShippingCost] = useState(0);
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ if(totalAmount === 0){
       </div>
       <hr />
 5
-      {all_product.map((e) => {
+      {products.map((e) => {
         if (cartItems[e.id] > 0) {
           return (
             <div key={e.id}>

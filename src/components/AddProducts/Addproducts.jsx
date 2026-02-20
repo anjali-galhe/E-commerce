@@ -1,130 +1,258 @@
 import React, { useState } from 'react'
-import { useShopContext } from '../../context/ShopContext'
+import { useShopContext } from '../../context/shopContext';
+
+import FormError from '../error.jsx/error';
+import {toast,ToastContainer} from 'react-toastify';
+import { RxCross2 } from "react-icons/rx";
+
+
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';import { useRef } from "react";
+
+
 import './Addproduct.css'
 
 
 const AddProducts = () => {
-
-  const {addProducts}= useShopContext();
-
-  const[data,setData]=useState
-  ({
-    id:"",
-    name:"",
-    image:"",
-    category:"",
-    new_price:"",
-    old_price:""
-  })
-  const handleChange = (e) => {
-    const{ name, value,files} = e.target;
-
-    if(name ==="image"){
-      setData({
-        ...data,
-        image: files[0]
-      })
-    }else{
-    setData({
-      ...data,
-      [e.target.name]: e.target.value
-    });
-  }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newProduct = {
-      ...data,
-      id: Number(data.id),
-      new_price: Number(data.new_price),
-      old_price:Number(data.old_price)
-    };
   
-    addProducts(newProduct);
+  const fileInputRef = useRef(null);
 
-   setData({
-      id: "",
-      name: "",
-      image: "",
-      category:"",
-      new_price: "",
-      old_price:"",
-      category: ""
-    });
-  };
+  //formik
+   const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(2, '*Name must be at least 2 characters')
+      .required(' *Product Name is required'),
+    category: Yup.string()
+      .required('*Category is required'),
+    image: Yup.array()
+  .min(1, "*At least one image is required")
+  .required("*Image is required"),
+      new_price: Yup.number()
+      .required('*Current Price is required'),
+      old_price: Yup.number()
+      .required('*Real Price is required')
+      // ,
+      // id: Yup.number()
+      // .required('*Id is required'),
+  });
+
+
+  const {addProduct}= useShopContext();
+  const [preview, setPreview] = useState([]);
+
+//   const[data,setData]=useState
+//   ({
+//     id:"",
+//     name:"",
+//     image:"",
+//     category:"",
+//     new_price:"",
+//     old_price:""
+//   })
+// const handleChange = (e) => {
+//   const { name, value, files } = e.target;
+
+//   if (name === "image") {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(files[0]);
+
+//     reader.onload = () => {
+//       setData((prev) => ({
+//         ...prev,
+//         image: reader.result
+//       }));
+//     };
+//   } else {
+//     setData((prev) => ({
+//       ...prev,
+//       [name]: value
+//     }));
+//   }
+// };
+
+  // const handleSubmit = () => {
+  //     const newProduct = {
+  //     ...data,
+  //     id: Number(data.id),
+  //     new_price: Number(data.new_price),
+  //     old_price:Number(data.old_price)
+  //   };
   
+  //   addProduct(newProduct);
+
+  //  setData({
+  //     id: "",
+  //     name: "",
+  //     image: "",
+  //     category:"",
+  //     new_price: "",
+  //     old_price:""
+  //   });
+  // };
+
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+    <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+// transition={Bounce}
+/>
+
+      <Formik
+      initialValues={{ name: '', id: '', image: [], category: '', new_price:"", old_price: '',}}
+      validationSchema={validationSchema}
+       onSubmit={(values, { resetForm }) => {
+        toast.success('Product Added successfully..', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "light",
+// transition: Bounce,
+});
+          const newProduct = {
+            ...values,
+            id: Number(values.id),
+            new_price: Number(values.new_price),
+            old_price: Number(values.old_price),
+
+            
+          };
+
+          addProduct(newProduct);
+          resetForm();
+          setPreview([])
+      }}
+      >
+{({ isSubmitting, setFieldValue }) => (
+        <Form>
+      <h1>Add Product</h1>
 <div className="product-id">
-  <input
+  {/* <Field
    type="number"
    placeholder='Product Id..'
   name='id'
-
-  value={data.id} 
-  onChange={handleChange}
-  required />
+  // value={data.id} 
+  // onChange={handleChange}
+ />
+<FormError name="id" /> */}
 
 </div>
  <div className="product-name">
-  <input
+  <Field
    type="text"
    placeholder='Product Name..'
    name='name'
-   value={data.name}
-   onChange={handleChange}
-   required
+  //  value={data.name}
+  //  onChange={handleChange}
    />
+<FormError name="name" />
 
  </div>
  <div className="product-category">
-  <input type="text"
+  <Field type="text"
     placeholder=' Product Category..'
     name='category'
-    value={data.category} 
-    onChange={handleChange}
-    required
+    // value={data.category} 
+    // onChange={handleChange}
     />
+<FormError name="category" />
+
  </div>
 
-<div className="product-image">
-  <input 
-  type="file"
-  name='image'
-  placeholder='Add Image..'
-  // value={data.image}
-  onChange={handleChange}
-  required
-   />
-
-</div>
 <div className="product-new-price">
-  <input 
+  <Field 
   type="number"
   name='new_price'
   placeholder='Current Price' 
-  value={data.new_price}
-  onChange={handleChange}
-  required
+  // value={data.new_price}
+  // onChange={handleChange}
   />
+<FormError name="new_price" />
+
   
 </div>
 <div className="product-old-price">
-  <input type="number"
-  placeholder='Old Price'
+  <Field type="number"
+  placeholder='Real Price'
   name='old_price'
-  onChange={handleChange}
-  value={data.old_price}
-  required
+  // onChange={handleChange}
+  // value={data.old_price}
+  
    />
+<FormError name="old_price" />
+
 
 </div>
-<button type='submit'>Add Product</button>
-      </form>
+
+<div className="product-image">
+ <input
+   ref={fileInputRef}
+  type="file"
+  name="image"
+  multiple
+  
+ onChange={(event) => {
+  const files = Array.from(event.currentTarget.files);
+
+  const imagePromises = files.map((file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+    });
+  });
+
+  Promise.all(imagePromises).then((images) => {
+    setFieldValue("image", images);
+    setPreview(images);
+  });
+}}
+/>
+<FormError name="image" />
+{preview.length > 0 && (
+  <div className="image-preview">
+    {preview.map((img, index) => (
+      <div key={index} className="image-wrapper">
+        <img src={img} alt="Preview" />
+
+        <button
+          type="button"
+          className="remove-btn"
+          onClick={() => {
+            const updated = preview.filter((_, i) => i !== index);
+            setPreview(updated);
+            setFieldValue("image", updated);
+
+            if (updated.length === 0) {
+      fileInputRef.current.value = "";
+    }
+          }}
+        >
+          <RxCross2 />
+        </button>
+      </div>
+    ))}
+  </div>
+)}
+</div>
+<button type='submit' disabled={isSubmitting}>Add</button>
+      </Form>
+)
+}
+    </Formik>
     </div>
   )
 }

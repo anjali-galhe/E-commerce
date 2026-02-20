@@ -1,6 +1,6 @@
 import React from 'react'
 import {  NavLink } from 'react-router-dom'
-import { useShopContext } from "../../context/shopContext";
+import { useShopContext } from '../../context/ShopContext'
 import "./Sidebar.css"
 
 

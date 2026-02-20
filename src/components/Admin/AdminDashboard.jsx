@@ -1,15 +1,18 @@
 import React from 'react'
-import all_product from '../Assets/all_product'
+// import all_product from '../Assets/all_product'
 import { BsFillBagHeartFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { BsFillBoxSeamFill } from "react-icons/bs";
+import { useShopContext } from "../../context/ShopContext";
 
 
 
 import "./AdminDashboard.css"
 
 const AdminDashboard = () => {
-  const products = all_product
+  // const products = all_product
+
+const { products } = useShopContext();
   const totalProducts = products.length;
 
   const users = JSON.parse(localStorage.getItem("users")) || [];

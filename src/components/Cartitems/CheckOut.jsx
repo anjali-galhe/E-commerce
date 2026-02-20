@@ -1,5 +1,4 @@
-
-import { ShopContext } from "../../context/shopContext"
+import { ShopContext } from "../../context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import "./Checkout.css";
@@ -13,7 +12,7 @@ const CheckOut = () => {
 
 
 
-const { getTotalCartAmount, all_product, cartItems } =
+const { getTotalCartAmount, products, cartItems } =
   useContext(ShopContext);
     const totalAmount = getTotalCartAmount();
     const navigate = useNavigate();
@@ -87,7 +86,7 @@ const { getTotalCartAmount, all_product, cartItems } =
 
 
   
-  const orderedProducts = all_product.filter(
+  const orderedProducts = products.filter(
   (p) => cartItems[p.id] > 0
 ).map((p) => ({
   id: p.id,

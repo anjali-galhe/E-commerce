@@ -1,63 +1,110 @@
-/* Main Container */
+/* Main container for the form */
 form {
-  width: 500px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #1e1e2f;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  max-width: 1500px;
+  /* margin: 0px auto; */
+  /* padding: 4px; */
+  /* background: #ffffff; */
+  /* border-radius: 12px; */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
+  margin-left: 260px;
 }
 
-/* Heading (optional if you add one) */
-form h2 {
-  text-align: center;
-  color: white;
-  margin-bottom: 10px;
+/* Individual wrapper divs from your JSX */
+.product-id, 
+.product-name, 
+.product-category, 
+.product-image, 
+.product-new-price, 
+.product-old-price {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-/* Input Fields */
-form input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background-color: #e2e2ec;
-  color: white;
-  font-size: 14px;
-  transition: 0.3s;
+/* Input Styling */
+input {
+  width: 100%;
+  padding: 16px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+  transition: border-color 0.2s ease;
+  color: #333;
 }
 
-/* Input Focus */
-form input:focus {
+input:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 8px #4f46e5;
+  border-color: #6c63ff;
+  background-color: #fcfcff;
 }
 
-/* File Input */
-form input[type="file"] {
-  padding: 8px;
-  background-color: #f4f4f7;
-  color: rgb(17, 28, 66);
-  border: none;
-}
-
-/* Button */
-form button {
-  padding: 12px;
-  background: linear-gradient(45deg, #4f46e5, #6d28d9);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
+/* Special handling for the File input */
+input[type="file"] {
+  padding: 15px;
+  /* margin-left: 800px; */
+  background: #f8f9fa;
+  border: 1px dashed #ccc;
   cursor: pointer;
-  transition: 0.3s ease;
+
 }
 
-/* Button Hover */
-form button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 12px #6d28d9;
+/* Submit Button */
+button[type='submit'] {
+  margin-top: 10px;
+  background-color: #6c63ff;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s active;
+}
+
+button[type='submit']:hover {
+  background-color: #564fb1;
+}
+
+button[type='submit']:active {
+  transform: scale(0.99);
+}
+
+/* Placeholder styling */
+input::placeholder {
+  color: #aaa;
+}
+.image-preview {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 150px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }

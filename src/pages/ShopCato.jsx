@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 import './style/ShopCato.css'
-import { ShopContext } from '../context/ShopContext'
+// import { ShopContext } from '../context/ShopContext'
 import dropdown_icon from '../components/Assets/dropdown_icon.png'
 import Item from '../components/Item/Item'
+import { useShopContext } from '../context/ShopContext';
 
 const ShopCato = (props) => {
-  const { all_product } = useContext(ShopContext);
+  // const { all_product } = useContext(ShopContext);
+
+const { products } = useShopContext();
 
   return (
     <div className='shop-category'>
@@ -22,7 +25,7 @@ const ShopCato = (props) => {
       </div>
 
       <div className="shopcategory-products">
-        {all_product.map((item,i) => {
+        {products.map((item,i) => {
         if(props.category===item.category){
           return(
             <Item

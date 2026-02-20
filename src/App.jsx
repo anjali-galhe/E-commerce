@@ -22,8 +22,7 @@ import AdminLayout from './components/Admin/AdminLayout'
 import AdminDashboard from './components/Admin/AdminDashboard'
 import Addproducts from './components/AddProducts/Addproducts'
 import ViewOrders from './components/ViewOrders/ViewOrders'
-
-import { useShopContext } from './context/shopContext'
+import { useShopContext } from './context/ShopContext'
 import Viewproducts from './components/Viewproducts/Viewproducts'
 
 
