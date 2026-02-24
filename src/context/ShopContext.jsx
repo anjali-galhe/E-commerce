@@ -14,7 +14,7 @@ const getDefaultCart = (productList) => {
 };
 
 
-export const useShopContext = () => {
+export const useShopContext = () => { 
   return useContext(ShopContext);
 };
 
@@ -29,12 +29,23 @@ const ShopContextProvider = ({ children }) => {
   const [products,setProducts] = useState([]);
   // const[productList, setProductList] = useState("");
 
-  const deleteProduct =(itemId) => {
-       setProducts((prev) => ({
-      ...prev,
-      [itemId]: prev[itemId] - 1,
-    }));
-  };
+  // const deleteProduct =(itemId) => {
+  //      setProducts((prev) => ({
+  //     ...prev,
+  //     [itemId]: prev[itemId] - 1,
+  //   }));
+  // };
+  const deleteProduct = (id) => {
+  const updatedProducts = products.filter(
+    (product) => product.id !== id
+  );
+
+  setProducts(updatedProducts);
+  localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+  setCartItems(getDefaultCart(updatedProducts));
+};
+
   
 
 
@@ -45,23 +56,31 @@ useEffect(() => {
     setProducts(savedProducts);
     setCartItems(getDefaultCart(savedProducts));
   } else {
-    setProducts(all_product);
-    localStorage.setItem("products", JSON.stringify(all_product));
-    setCartItems(getDefaultCart(all_product));
+    setProducts(products);
+    localStorage.setItem("products", JSON.stringify(products));
+    setCartItems(getDefaultCart(products));
   }
 }, []);
 
 
 const addProduct = (productData) => {
-   productData.id=products.length+1;
-  console.log('addProduct=> ', productData);
-  
- 
-  const updatedProducts = [...products, productData];
+  const newProduct = {
+    ...productData,
+    id: Math.floor(Math.random() * 1000000),
+  };
+
+  const updatedProducts = [...products, newProduct];
   setProducts(updatedProducts);
   localStorage.setItem("products", JSON.stringify(updatedProducts));
-  debugger;
+
+  setCartItems(getDefaultCart(updatedProducts));
 };
+ 
+//   const updatedProducts = [...products, productData];
+//   setProducts(updatedProducts);
+//   localStorage.setItem("products", JSON.stringify(updatedProducts));
+//   debugger;
+// };
 
 //end new product
 
@@ -73,17 +92,18 @@ const login = (name, email, selectedRole) => {
   };
 
   // Get existing users
-  const existingUsers =
-    JSON.parse(localStorage.getItem("users")) || [];
+  // const existingUsers =
+  //   JSON.parse(localStorage.getItem("users")) || [];
 
   // Add new user
-  existingUsers.push(userData);
+  // existingUsers.push(userData);
 
   // Save updated users list
-  localStorage.setItem("users", JSON.stringify(existingUsers));
+  // localStorage.setItem("users", JSON.stringify(existingUsers));
 
   // Save current logged in user
   localStorage.setItem("currentUser", JSON.stringify(userData));
+  localStorage.setItem("isLoggedIn", "true");
 
   setUser(userData);
   setRole(selectedRole);
@@ -100,12 +120,11 @@ useEffect(() => {
 }, []);
 
 
-// const logout = () => {
-//   setUser({email});
-//   setRole("selectedRole");
-// };
+
 const logout = () => {
+  debugger
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("isLoggedIn")
   setUser(null);
   setRole("user");
 };
@@ -162,7 +181,7 @@ const logout = () => {
   };
 
   const contextValue = {
-    all_product,
+    // all_product,
     cartItems,
     addToCart,
     removeFromCart,
@@ -178,7 +197,8 @@ const logout = () => {
     products,
     addProduct,
     setProducts,
-deleteProduct,
+deleteProduct
+  
 
   };
 
@@ -187,6 +207,5 @@ deleteProduct,
       {children}
     </ShopContext.Provider>
   );
-};
-
+}
 export default ShopContextProvider;

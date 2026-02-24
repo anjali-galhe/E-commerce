@@ -190,7 +190,7 @@ onClick={()=>{
 
  <div className="order-box">
   <p className="order-total">
-   Total Amount: <span>${totalAmount}</span>
+   Total Amount: <span>₹{totalAmount}</span>
   </p>
   <button className="place-order-btn"
   onClick={handlePlaceorder}>

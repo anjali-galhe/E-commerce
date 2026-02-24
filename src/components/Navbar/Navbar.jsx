@@ -11,11 +11,13 @@ import { TfiLocationPin } from "react-icons/tfi";
 
 import { useState, useEffect } from "react";
 import { RiUserHeartLine } from "react-icons/ri";
+import { useShopContext } from '../../context/shopContext'
 
 
 
 
 const Navbar = () => {
+  const { role } = useShopContext();
 
   const {getTotalCartItems} = useContext(ShopContext);
 
@@ -40,6 +42,16 @@ useEffect(() => {
           <input type="text" placeholder='Search..' />
           <button>⌕</button>
         </div>
+        <div className="admin">
+        {role === "admin" &&(
+          <Link to= "/admin">
+               <button>admin</button>
+          </Link>)}
+
+  
+        </div>
+
+        
         <div className="nav-login-cart">
 {isLogin ? (
   <Link to="/profile">

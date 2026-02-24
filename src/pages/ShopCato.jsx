@@ -15,9 +15,9 @@ const { products } = useShopContext();
       <img className='shopCategory-banner' src={props.banner} alt="category banner" />
 
       <div className="shopcategory-indexSort">
-        <p>
+        {/* <p>
           <span>Showing 1-12</span> out of 36 products
-        </p>
+        </p> */}
       </div>
 
       <div className="shopcategory-sort">

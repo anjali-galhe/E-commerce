@@ -43,7 +43,7 @@ const Payment = () => {
     const code = couponCode.trim().toUpperCase();
     if (coupons[code]) {
       setDiscountPercent(coupons[code]);
-      alert(`Coupon applied! You got ${coupons[code]}% off.`);
+      alert(`Coupon applied! You got ₹{coupons[code]}% off.`);
     } else {
       setDiscountPercent(0);
       alert("Invalid coupon code!");
@@ -106,7 +106,7 @@ const Payment = () => {
     updateTotalIncome(discountedAmount);
     saveOrderHistory(order);
 
-    alert(`✅ Order Placed! Total Paid: ₹${discountedAmount.toFixed(2)}`);
+    alert(`✅ Order Placed! Total Paid: ₹{discountedAmount.toFixed(2)}`);
 
     localStorage.removeItem("cartItems");
     clearCart();
@@ -213,8 +213,8 @@ const Payment = () => {
           <h3>Delivery Options</h3>
           {["today", "fast", "free"].map((option) => {
             const labelMap = {
-              today: "Deliver Today ($100)",
-              fast: "Deliver in 1-2 Days ($50)",
+              today: "Deliver Today (₹100)",
+              fast: "Deliver in 1-2 Days (₹50)",
               free: "Standard Delivery (Free)",
             };
             return (

@@ -48,13 +48,13 @@ if(totalAmount === 0){
                   alt={e.name}
                 />
                 <p>{e.name}</p>
-                <p>${e.new_price}</p>
+                <p>₹{e.new_price}</p>
 
                 <button className='cartitem-quantity'>
                   {cartItems[e.id]}
                 </button>
 
-                <p>${e.new_price * cartItems[e.id]}</p>
+                <p>₹{e.new_price * cartItems[e.id]}</p>
 
                 <img
                   className="cartitems-remove-icon"
@@ -74,7 +74,7 @@ if(totalAmount === 0){
         <div>
             <div className="cart-item-total-item">
                 <p>Subtotal</p>
-                <p>${getTotalCartAmount()}</p>
+                <p>₹{getTotalCartAmount()}</p>
             </div>
             <hr />
             <div className='cartitem-total-item'>
@@ -105,7 +105,7 @@ if(totalAmount === 0){
             <hr />
             <div className='cartitem-total-item'></div>
                 <h3>Total</h3>
-                <h3>${getTotalCartAmount() + shippingCost}</h3>
+                <h3>₹{getTotalCartAmount() + shippingCost}</h3>
             </div>
             <button className='cartitem-checkout-button'onClick={handleSubmit}>Proceed to Checkout</button>
         </div>

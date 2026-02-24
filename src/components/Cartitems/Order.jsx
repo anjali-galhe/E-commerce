@@ -38,7 +38,7 @@ useEffect(() => {
         <h2>Order Successful!!</h2>
     <div className="order-details">
 <h3>Order Summary</h3>
-<p>Amount Paid: ${totalAmount}</p>
+<p>Amount Paid: ₹{totalAmount}</p>
 <p>Payment Method : {paymentMethod}</p>
 <p>Dilivey Method: {deliveyOption}</p>
 

@@ -61,13 +61,13 @@ const LoginSignup = () => {
       );
 
       if (existingUser) {
-        localStorage.setItem("currentUser", JSON.stringify(existingUser));
-        localStorage.setItem("isLoggedIn", "true");
+        // localStorage.setItem("currentUser", JSON.stringify(existingUser));
+        // localStorage.setItem("isLoggedIn", "true");
 
         login(existingUser.email, existingUser.password, existingUser.role);
 
         if (existingUser.role === "admin") {
-          navigate("/admin");
+          navigate("/");
         } else {
           navigate("/");
         }

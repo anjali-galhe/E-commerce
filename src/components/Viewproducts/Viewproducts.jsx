@@ -32,7 +32,7 @@ const { products, deleteProduct } = useShopContext();
         </thead>
 
         <tbody>
-          {products.map((product) => (
+          {products.reverse().map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
            <td>
@@ -57,9 +57,13 @@ const { products, deleteProduct } = useShopContext();
               <td>₹{product.new_price}</td>
               <td>₹{product.old_price}</td>
               <td>
-                <button className="edit-btn" >Edit</button>
-                <button className="delete-btn">Delete</button>
-              </td>
+                <button className="edit-btn"  >Edit</button>
+<button 
+  className="delete-btn" 
+  onClick={() => deleteProduct(product.id)}
+>
+  Delete
+</button>              </td>
             </tr>
           ))}
         </tbody>

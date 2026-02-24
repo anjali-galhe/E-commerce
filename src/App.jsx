@@ -1,7 +1,7 @@
 
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
-import {  Route, Routes } from 'react-router-dom'
+import {  Navigate, Route, Routes } from 'react-router-dom'
 import ShopCato from './pages/ShopCato'
 import LoginSignup from './pages/LoginSignup'
 import Shop from './pages/Shop'
@@ -24,17 +24,22 @@ import Addproducts from './components/AddProducts/Addproducts'
 import ViewOrders from './components/ViewOrders/ViewOrders'
 import { useShopContext } from './context/ShopContext'
 import Viewproducts from './components/Viewproducts/Viewproducts'
+import { useLocation } from 'react-router-dom'
 
 
 function App() {
   const { role } = useShopContext();
+
+  const location = useLocation();
+
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
 
   
 
   return (
 <>
-          {role !== "admin" && <Navbar />}
+      {!isAdminRoute && <Navbar />}
 
    
     <main className="page-content">
@@ -64,7 +69,7 @@ function App() {
     <Routes>
         <Route
           path="/admin"
-          element={role === "admin" ? <AdminLayout /> : <h2>Access Denied</h2>}
+          element={role === "admin" ? <AdminLayout /> : <Navigate to="/"/>}
         >
           <Route index element={<AdminDashboard />} />
           <Route path="add-product" element={<Addproducts />} />
@@ -76,7 +81,7 @@ function App() {
         <Route path="*" element={<h2>Page Not Found</h2>} />
 
       </Routes>
-              {role !== "admin" && <Footer />}
+      {!isAdminRoute && <Footer />}
 
         </>
         
