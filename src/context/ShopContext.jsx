@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState ,useEffect} from "react";
 import all_product from "../components/Assets/all_product";
-
 export const ShopContext = createContext(null);
 
 
@@ -19,6 +18,7 @@ export const useShopContext = () => {
 };
 
 const ShopContextProvider = ({ children }) => {
+  const [edit, setEdit] = useState("")
   const [search, setSearch] = useState("");
   const [cartItems, setCartItems] = useState({});
   
@@ -35,6 +35,7 @@ const ShopContextProvider = ({ children }) => {
   //     [itemId]: prev[itemId] - 1,
   //   }));
   // };
+
   const deleteProduct = (id) => {
   const updatedProducts = products.filter(
     (product) => product.id !== id
@@ -44,6 +45,14 @@ const ShopContextProvider = ({ children }) => {
   localStorage.setItem("products", JSON.stringify(updatedProducts));
 
   setCartItems(getDefaultCart(updatedProducts));
+};
+
+const editProduct = (updatedProduct) => {
+  setProducts((prevProducts) =>
+    prevProducts.map((item) =>
+      item.id === updatedProduct.id ? updatedProduct : item
+    )
+  );
 };
 
   
@@ -197,7 +206,10 @@ const logout = () => {
     products,
     addProduct,
     setProducts,
-deleteProduct
+deleteProduct,
+editProduct,
+edit,
+setEdit
   
 
   };

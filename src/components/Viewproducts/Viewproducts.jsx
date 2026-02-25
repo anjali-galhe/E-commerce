@@ -1,14 +1,38 @@
-import React from "react";
+import  { useState, useEffect } from "react";
 // import all_product from "../Assets/all_product";
 import "./Viewproduct.css";
 import { useShopContext } from "../../context/ShopContext";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Viewproducts = () => {
+
+
+
+  const { products, deleteProduct , editProduct,setEdit } = useShopContext();
   // const products = all_product;
 
-const { products, deleteProduct } = useShopContext();
+//   useEffect(() => {
+//   if (editData) {
+//     setData(editData);
+//     setIsEdit(true);
+//   }
+// }, []);
 
-// localStorage.clear()
+const navigate = useNavigate()
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (isEdit) {
+    editProduct(data);
+  } else {
+    addProducts(data);
+  }
+
+  navigate("/admin/view-products");
+};
+
 
 
 
@@ -32,7 +56,7 @@ const { products, deleteProduct } = useShopContext();
         </thead>
 
         <tbody>
-          {products.reverse().map((product) => (
+          {[...products].reverse().map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
            <td>
@@ -57,10 +81,15 @@ const { products, deleteProduct } = useShopContext();
               <td>₹{product.new_price}</td>
               <td>₹{product.old_price}</td>
               <td>
-                <button className="edit-btn"  >Edit</button>
-<button 
+<button
+  className="edit-btn"
+  onClick={() =>  { setEdit(product),navigate("/admin/add-product")}}
+>
+  Edit
+</button><button 
   className="delete-btn" 
-  onClick={() => deleteProduct(product.id)}
+  onClick={() => deleteProduct(product.id) }
+  onChange={handleSubmit}
 >
   Delete
 </button>              </td>

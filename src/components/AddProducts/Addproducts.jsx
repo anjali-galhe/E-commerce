@@ -35,58 +35,11 @@ const AddProducts = () => {
     // .required('*Id is required'),
   });
 
-  const { addProduct } = useShopContext();
+  const { addProduct , edit } = useShopContext();
+  console.log(edit)
   const [preview, setPreview] = useState([]);
 
-  //   const[data,setData]=useState
-  //   ({
-  //     id:"",
-  //     name:"",
-  //     image:"",
-  //     category:"",
-  //     new_price:"",
-  //     old_price:""
-  //   })
-  // const handleChange = (e) => {
-  //   const { name, value, files } = e.target;
 
-  //   if (name === "image") {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(files[0]);
-
-  //     reader.onload = () => {
-  //       setData((prev) => ({
-  //         ...prev,
-  //         image: reader.result
-  //       }));
-  //     };
-  //   } else {
-  //     setData((prev) => ({
-  //       ...prev,
-  //       [name]: value
-  //     }));
-  //   }
-  // };
-
-  // const handleSubmit = () => {
-  //     const newProduct = {
-  //     ...data,
-  //     id: Number(data.id),
-  //     new_price: Number(data.new_price),
-  //     old_price:Number(data.old_price)
-  //   };
-
-  //   addProduct(newProduct);
-
-  //  setData({
-  //     id: "",
-  //     name: "",
-  //     image: "",
-  //     category:"",
-  //     new_price: "",
-  //     old_price:""
-  //   });
-  // };
 
   return (
     <div>
@@ -101,17 +54,15 @@ const AddProducts = () => {
         draggable
         pauseOnHover
         theme="light"
-        // transition={Bounce}
       />
 
       <Formik
         initialValues={{
-          name: "",
-          // id: "",
-          image: [],
-          category: "",
-          new_price: "",
-          old_price: "",
+          name: edit?.name|| "",
+          image: edit?.image || [],
+          category: edit?.category|| "",
+          new_price: edit?.new_price|| "",
+          old_price:edit?.old_price|| "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
@@ -124,7 +75,6 @@ const AddProducts = () => {
             draggable: true,
             progress: undefined,
             theme: "light",
-            // transition: Bounce,
           });
           const newProduct = {
             ...values,
@@ -142,23 +92,13 @@ const AddProducts = () => {
         {({ isSubmitting, setFieldValue }) => (
           <Form>
             <h1>Add Product</h1>
-            {/* <div className="product-id"> */}
-              {/* <Field
-   type="number"
-   placeholder='Product Id..'
-  name='id'
-  // value={data.id} 
-  // onChange={handleChange}
- />
-<FormError name="id" /> */}
-            {/* </div> */}
+           
             <div className="product-name">
               <Field
                 type="text"
                 placeholder="Product Name.."
                 name="name"
-                //  value={data.name}
-                //  onChange={handleChange}
+                
               />
               <FormError name="name" />
             </div>
@@ -167,8 +107,7 @@ const AddProducts = () => {
                 type="text"
                 placeholder=" Product Category.."
                 name="category"
-                // value={data.category}
-                // onChange={handleChange}
+                
               />
               <FormError name="category" />
             </div>
@@ -178,8 +117,7 @@ const AddProducts = () => {
                 type="number"
                 name="new_price"
                 placeholder="Current Price"
-                // value={data.new_price}
-                // onChange={handleChange}
+                
               />
               <FormError name="new_price" />
             </div>
@@ -188,12 +126,13 @@ const AddProducts = () => {
                 type="number"
                 placeholder="Real Price"
                 name="old_price"
-                // onChange={handleChange}
-                // value={data.old_price}
+                
               />
               <FormError name="old_price" />
             </div>
-
+            {edit&&
+            <img src={edit.image} className="w-[100px]" /> 
+            }
             <div className="product-image">
               <input
                 ref={fileInputRef}
