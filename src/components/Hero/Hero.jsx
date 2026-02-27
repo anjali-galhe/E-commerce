@@ -3,6 +3,7 @@
 import React from 'react'
 import './hero.css'
 import model from '../Assets/model.png'
+// import modelll from '../Assets/modelll.png'
 
 function Hero() {
   return (

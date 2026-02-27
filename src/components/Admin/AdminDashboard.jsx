@@ -4,10 +4,8 @@ import { BsFillBagHeartFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { useShopContext } from "../../context/ShopContext";
-
-
-
 import "./AdminDashboard.css"
+import Adminchart from '../Adminchart/Adminchart';
 
 const AdminDashboard = () => {
   // const products = all_product
@@ -22,6 +20,7 @@ const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 
   return (
+    <div className="dashboard">
     <div className='admin-dashboard'>
       <div className="admin-total-products">
         <div className="icon">
@@ -45,6 +44,8 @@ const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
        <h2>Orders{orders.length}</h2>
       </div>
+    </div>
+      <Adminchart/>
     </div>
   )
 }

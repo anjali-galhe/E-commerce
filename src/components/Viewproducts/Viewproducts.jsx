@@ -86,7 +86,8 @@ const handleSubmit = (e) => {
   onClick={() =>  { setEdit(product),navigate("/admin/add-product")}}
 >
   Edit
-</button><button 
+</button>
+<button 
   className="delete-btn" 
   onClick={() => deleteProduct(product.id) }
   onChange={handleSubmit}

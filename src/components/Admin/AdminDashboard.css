@@ -1,11 +1,15 @@
+.dashboard {
+  padding-left: 250px;
+}
+
 .admin-dashboard {
   display: flex;
   gap: 30px;
   padding: 40px;
   flex-wrap: wrap;
   /* background: linear-gradient(to right, #0f172a, #0b1120); */
-  min-height: 100vh;
-  padding-left: 250px ;
+  /* min-height: 100vh; */
+  /* padding-left: 250px ; */
 }
 
 /* Card Style */

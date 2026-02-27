@@ -23,18 +23,10 @@ const ShopContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
   
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState("user"); // default
+  const [role, setRole] = useState("user");
 
-  //new product
   const [products,setProducts] = useState([]);
-  // const[productList, setProductList] = useState("");
-
-  // const deleteProduct =(itemId) => {
-  //      setProducts((prev) => ({
-  //     ...prev,
-  //     [itemId]: prev[itemId] - 1,
-  //   }));
-  // };
+  
 
   const deleteProduct = (id) => {
   const updatedProducts = products.filter(
@@ -42,12 +34,13 @@ const ShopContextProvider = ({ children }) => {
   );
 
   setProducts(updatedProducts);
-  localStorage.setItem("products", JSON.stringify(updatedProducts));
-
+  localStorage.setItem( "products", JSON.stringify(updatedProducts));
+  
   setCartItems(getDefaultCart(updatedProducts));
 };
 
 const editProduct = (updatedProduct) => {
+  console.log("updatedProduct", updatedProduct);
   setProducts((prevProducts) =>
     prevProducts.map((item) =>
       item.id === updatedProduct.id ? updatedProduct : item
@@ -84,14 +77,7 @@ const addProduct = (productData) => {
 
   setCartItems(getDefaultCart(updatedProducts));
 };
- 
-//   const updatedProducts = [...products, productData];
-//   setProducts(updatedProducts);
-//   localStorage.setItem("products", JSON.stringify(updatedProducts));
-//   debugger;
-// };
 
-//end new product
 
 const login = (name, email, selectedRole) => {
   const userData = {
@@ -100,17 +86,7 @@ const login = (name, email, selectedRole) => {
     role: selectedRole
   };
 
-  // Get existing users
-  // const existingUsers =
-  //   JSON.parse(localStorage.getItem("users")) || [];
-
-  // Add new user
-  // existingUsers.push(userData);
-
-  // Save updated users list
-  // localStorage.setItem("users", JSON.stringify(existingUsers));
-
-  // Save current logged in user
+  
   localStorage.setItem("currentUser", JSON.stringify(userData));
   localStorage.setItem("isLoggedIn", "true");
 
@@ -153,9 +129,7 @@ const logout = () => {
     }));
   };
 
-  // const clearCart = () => {
-  //   setCartItems(getDefaultCart());
-  // };
+  
   const clearCart = () => {
   setCartItems(getDefaultCart(products));
 };
@@ -164,9 +138,7 @@ const logout = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        // const itemInfo = all_product.find(
-        //   (product) => product.id === Number(item)
-        // );
+       
         const itemInfo = products.find(
   (product) => product.id === Number(item)
 );

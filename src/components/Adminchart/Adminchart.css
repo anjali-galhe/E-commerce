@@ -1,0 +1,39 @@
+.admin-chart-wrapper {
+  margin-top: 10px;
+}
+
+.admin-chart-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.admin-chart-box {
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  padding: 20px;
+  border-radius: 18px;
+  height: 330px;
+  box-shadow: 
+    0 10px 20px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: 0.3s ease;
+}
+
+.admin-chart-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 30px rgba(0,0,0,0.08);
+}
+
+.admin-chart-box h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+/* Chart size */
+.admin-chart-box canvas {
+  width: 100% !important;
+  height: 260px !important;
+}

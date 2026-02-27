@@ -35,7 +35,7 @@ const AddProducts = () => {
     // .required('*Id is required'),
   });
 
-  const { addProduct , edit } = useShopContext();
+  const { addProduct ,editProduct, edit } = useShopContext();
   console.log(edit)
   const [preview, setPreview] = useState([]);
 
@@ -65,29 +65,64 @@ const AddProducts = () => {
           old_price:edit?.old_price|| "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          toast.success("Product Added successfully..", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          const newProduct = {
-            ...values,
-            id: Number(values.id),
-            new_price: Number(values.new_price),
-            old_price: Number(values.old_price),
-          };
 
-          addProduct(newProduct);
-          resetForm();
-          setPreview([]);
-          navigate("/admin/product-list")
-        }}
+        // sumnit function wrking hera
+        // onSubmit={(values, { resetForm }) => {
+        //   console.log(values)
+        //   toast.success("Product Added successfully..", {
+        //     position: "top-center",
+        //     autoClose: 5000,
+        //     hideProgressBar: false,
+        //     closeOnClick: false,
+        //     pauseOnHover: true,
+        //     draggable: true,
+        //     progress: undefined,
+        //     theme: "light",
+        //   });
+
+        //   const newProduct = {
+        //     ...values,
+        //     id: Number(values.id),
+        //     new_price: Number(values.new_price),
+        //     old_price: Number(values.old_price),
+        //   };
+
+        //   addProduct(newProduct);
+        //   resetForm();
+        //   setPreview([]);
+        //   navigate("/admin/product-list")
+        // }}
+
+
+        onSubmit={(values, { resetForm }) => {
+
+  const productData = {
+    ...values,
+    id: edit ? edit.id : Date.now(),   // edit me same id, add me new id
+    new_price: Number(values.new_price),
+    old_price: Number(values.old_price),
+  };
+
+  if (edit) {
+    editProduct(productData);   // 👉 UPDATE existing product
+    toast.success("Product Updated successfully..", {
+      position: "top-center",
+      autoClose: 5000,
+      theme: "light",
+    });
+  } else {
+    addProduct(productData);      // 👉 ADD new product
+    toast.success("Product Added successfully..", {
+      position: "top-center",
+      autoClose: 5000,
+      theme: "light",
+    });
+  }
+
+  resetForm();
+  setPreview([]);
+  navigate("/admin/product-list");
+}}
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form>
